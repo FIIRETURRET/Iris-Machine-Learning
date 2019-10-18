@@ -3,7 +3,9 @@
 Created on Thu Oct 17 15:14:58 2019
 
 @author: joutras
-https://machinelearningmastery.com/machine-learning-in-python-step-by-step/
+Tutorial: https://machinelearningmastery.com/machine-learning-in-python-step-by-step/
+Classification Report: https://muthu.co/understanding-the-classification-report-in-sklearn/
+Linear Discriminant Analysis(LDA): https://blog.eduonix.com/artificial-intelligence/linear-discriminant-analysis-with-scikit-learn/
 """
 
 import pandas 
@@ -101,9 +103,82 @@ plt.show()
 knn = KNeighborsClassifier()
 knn.fit(X_train, Y_train)
 predictions = knn.predict(X_validation)
+labels = ['Iris-setosa', 'Iris-versicolor', 'Iris-virginica']
+
 print('accuracy score:')
 print(accuracy_score(Y_validation, predictions))
+print("\n")
 print('confusion matrix:')
-print(confusion_matrix(Y_validation, predictions))
+cm = confusion_matrix(Y_validation, predictions, labels)
+print(cm)
+fig = plt.figure()
+ax = fig.add_subplot(111)
+cax = ax.matshow(cm)
+plt.title('Confusion matrix of the classifier')
+fig.colorbar(cax)
+ax.set_xticklabels([''] + labels)
+ax.set_yticklabels([''] + labels)
+plt.xlabel('Predicted')
+plt.ylabel('True')
+plt.show()
+print("\n")
 print('classification report:')
+print('Percision - What percent of your predictions were correct')
+print('Precision is the ability of a classifier not to label an instance positive that is actually negative. For each class it is defined as the ratio of true positives to the sum of true and false positives.')
+print('\n')
+print('Recall - What percent of the positive casses did you catch?')
+print('Recall is the ability of a classifier to find all positive instances. For each class it is defined as the ratio of true positives to the sum of true positives and false negatives.')
+print('\n')
+print('F1 Score - What percent of positive predictions were correct?')
+print('The F1 score is a weighted harmonic mean of precision and recall such that the best score is 1.0 and the worst is 0.0. Generally speaking, F1 scores are lower than accuracy measures as they embed precision and recall into their computation. As a rule of thumb, the weighted average of F1 should be used to compare classifier models, not global accuracy.')
+print('\n')
 print(classification_report(Y_validation, predictions))
+print("\n\n")
+
+
+# Try using SVM
+svclassifier = SVC(kernel='linear')
+svclassifier.fit(X_train, Y_train)
+predictions = svclassifier.predict(X_validation)
+
+print('accuracy score:')
+print(accuracy_score(Y_validation, predictions))
+print("\n")
+print('confusion matrix:')
+cm = confusion_matrix(Y_validation, predictions, labels)
+print(cm)
+fig = plt.figure()
+ax = fig.add_subplot(111)
+cax = ax.matshow(cm)
+plt.title('Confusion matrix of the classifier')
+fig.colorbar(cax)
+ax.set_xticklabels([''] + labels)
+ax.set_yticklabels([''] + labels)
+plt.xlabel('Predicted')
+plt.ylabel('True')
+plt.show()
+print("\n")
+print('classification report:')
+print('Percision - What percent of your predictions were correct')
+print('Precision is the ability of a classifier not to label an instance positive that is actually negative. For each class it is defined as the ratio of true positives to the sum of true and false positives.')
+print('\n')
+print('Recall - What percent of the positive casses did you catch?')
+print('Recall is the ability of a classifier to find all positive instances. For each class it is defined as the ratio of true positives to the sum of true positives and false negatives.')
+print('\n')
+print('F1 Score - What percent of positive predictions were correct?')
+print('The F1 score is a weighted harmonic mean of precision and recall such that the best score is 1.0 and the worst is 0.0. Generally speaking, F1 scores are lower than accuracy measures as they embed precision and recall into their computation. As a rule of thumb, the weighted average of F1 should be used to compare classifier models, not global accuracy.')
+print('\n')
+print(classification_report(Y_validation, predictions))
+print("\n\n")
+
+
+# Try using LDA
+from sklearn import datasets
+iris = datasets.load_iris()
+iris_features = iris.data
+print(iris_features)
+iris_target = iris.target
+print(iris_target)
+print(X_validation)
+print(X_train)
+print(Y_train)
