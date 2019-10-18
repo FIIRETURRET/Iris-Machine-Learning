@@ -276,7 +276,6 @@ while (run == True):
         # free up memory
         del logisticRegr
         del predictions
-        del labels
         
         userInput = input("Enter to continue Q to quit: ")
         if (userInput == "Q" or userInput =="q"):
@@ -303,7 +302,6 @@ while (run == True):
         
         del cart
         del predictions
-        del labels
         
         userInput = input("Enter to continue Q to quit: ")
         if (userInput == "Q" or userInput =="q"):
@@ -332,7 +330,6 @@ while (run == True):
         # Free up memory
         del nb
         del predictions
-        del labels
         
         userInput = input("Enter to continue Q to quit: ")
         if (userInput == "Q" or userInput =="q"):
